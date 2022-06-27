@@ -1,11 +1,9 @@
 import React from 'react';
 import { BsFillMicFill, BsSearch, BsBell } from 'react-icons/bs';
 import { BiVideoPlus } from 'react-icons/bi';
-import { TbVideoPlus } from 'react-icons/tb';
 import { CgMenuGridR } from 'react-icons/cg';
-import { AiOutlineMenu } from 'react-icons/ai';
 import { FiMenu } from 'react-icons/fi';
-import { ReactComponent as Logo } from '../assets/utube2017_vector.svg';
+// import { ReactComponent as Logo } from '../assets/utube2017_vector.svg';
 import logo from '../assets/utube_edited.jpg';
 
 const Header = () => {
