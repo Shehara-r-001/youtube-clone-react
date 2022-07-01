@@ -26,7 +26,7 @@ const Video = () => {
             <h1 className='font-semibold text-white'>name of the video</h1>
             <div className='text-sm text-[#8c8c8c] '>
               <p className='truncate'>name of the channel</p>
-              <div className='flex items-center'>
+              <div className='flex items-center text-xs'>
                 <p className='mr-1 truncate'>111K views</p>
                 <Interpunct> </Interpunct>
                 <p className='ml-1 truncate'>3 weeks ago</p>
