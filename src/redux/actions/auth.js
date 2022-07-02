@@ -6,6 +6,7 @@ import {
   LOGIN_SUCCESSFUL,
   LOAD_PROFILE,
   LOGIN_FAILED,
+  LOGOUT,
 } from '../actionType';
 
 export const login = () => async (dispatch) => {
@@ -30,6 +31,9 @@ export const login = () => async (dispatch) => {
       payload: accessToken,
     });
 
+    sessionStorage.setItem('utube-v2-access-token', accessToken);
+    sessionStorage.setItem('utube-v2-user', JSON.stringify(profile));
+
     dispatch({
       type: LOAD_PROFILE,
       payload: profile,
@@ -42,4 +46,14 @@ export const login = () => async (dispatch) => {
       payload: error.message,
     });
   }
+};
+
+export const logout = () => async (dispatch) => {
+  await auth.signOut();
+  dispatch({
+    type: LOGOUT,
+  });
+
+  sessionStorage.removeItem('utube-v2-access-token');
+  sessionStorage.removeItem('utube-v2-user');
 };

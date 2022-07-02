@@ -1,10 +1,13 @@
 import React from 'react';
-import { FiMenu } from 'react-icons/fi';
+import { FiMenu, FiLogOut } from 'react-icons/fi';
 import { AiTwotoneHome } from 'react-icons/ai';
 import { MdOutlineExplore, MdOutlineVideoLibrary } from 'react-icons/md';
 import { BsCollectionPlay, BsPlayCircle } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/actions/auth';
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
   return (
     <div className='top-0 -left-20 md:left-0 bg-black fixed h-screen w-[70px]  '>
       <div className='flex flex-col mt-4 text-gray-200'>
@@ -30,6 +33,13 @@ const Sidebar = () => {
         <div className='sidebarCont'>
           <MdOutlineVideoLibrary className='sidebarIcon' />
           <p className='sidebarText'>Library</p>
+        </div>
+        <div className='sidebarCont border-t border-b border-gray-900'>
+          <FiLogOut
+            onClick={() => dispatch(logout())}
+            className='sidebarIcon'
+          />
+          <p className='sidebarText'>Logout</p>
         </div>
       </div>
     </div>

@@ -1,14 +1,23 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Logo } from '../assets/full_color_icon.svg';
 import { login } from '../redux/actions/auth';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const accessToken = useSelector((state) => state.auth.accessToken);
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     dispatch(login());
   };
+
+  useEffect(() => {
+    if (accessToken) {
+      navigate('/', { replace: 'true' });
+    }
+  }, [accessToken, navigate]);
 
   return (
     <div className='h-screen w-full flex justify-center items-center flex-col'>
