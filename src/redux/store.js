@@ -1,18 +1,22 @@
-import { legacy_createStore as createStore, applyMiddleware } from 'redux';
+import {
+  legacy_createStore as createStore,
+  applyMiddleware,
+  combineReducers,
+} from 'redux';
 // import { configureStore } from '@reduxjs/toolkit';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import { authReducer } from './reducers/authReducer';
 
-const initialState = {
-  id: '1',
-  name: 'strider',
-};
+const rootReducer = combineReducers({
+  auth: authReducer,
+});
 
-const reducer = (initialState) => initialState;
+// const reducer = (initialState) => initialState;
 
 const store = createStore(
-  reducer,
-  initialState,
+  rootReducer,
+  {},
   composeWithDevTools(applyMiddleware(thunk))
 );
 
