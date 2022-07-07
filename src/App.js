@@ -9,9 +9,9 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 const Layout = ({ children }) => (
-  <div>
+  <div className=''>
     <Header />
-    <div>
+    <div className=''>
       <Sidebar />
       <div className='md:ml-[70px]'>
         <Tagsbar />
