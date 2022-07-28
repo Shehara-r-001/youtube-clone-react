@@ -1,32 +1,12 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { ReactComponent as Logo } from '../assets/full_color_icon.svg';
-import { login } from '../redux/actions/auth';
 
 const Login = () => {
-  const dispatch = useDispatch();
-  const accessToken = useSelector((state) => state.auth.accessToken);
-  const navigate = useNavigate();
-
-  const handleLogin = () => {
-    dispatch(login());
-  };
-
-  useEffect(() => {
-    if (accessToken) {
-      navigate('/', { replace: 'true' });
-    }
-  }, [accessToken, navigate]);
-
   return (
     <div className='h-screen w-full flex justify-center items-center flex-col'>
       <Logo />
 
-      <button
-        onClick={handleLogin}
-        className='relative px-5 py-3 overflow-hidden font-medium text-white rounded-md shadow-inner group mt-6'
-      >
+      <button className='relative px-5 py-3 overflow-hidden font-medium text-white rounded-md shadow-inner group mt-6'>
         <span className='absolute top-0 left-0 w-0 h-0 transition-all duration-200 border-t-2 border-red-600 group-hover:w-full ease'></span>
         <span className='absolute bottom-0 right-0 w-0 h-0 transition-all duration-200 border-b-2 border-red-600 group-hover:w-full ease'></span>
         <span className='absolute top-0 left-0 w-full h-0 transition-all duration-300 delay-200 bg-red-600 group-hover:h-full ease'></span>

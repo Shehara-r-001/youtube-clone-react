@@ -3,9 +3,7 @@ import { BsFillMicFill, BsSearch, BsBell } from 'react-icons/bs';
 import { BiVideoPlus } from 'react-icons/bi';
 import { CgMenuGridR } from 'react-icons/cg';
 import { FiMenu } from 'react-icons/fi';
-// import { ReactComponent as Logo } from '../assets/utube2017_vector.svg';
 import logo from '../assets/utube_edited.jpg';
-// import { useSelector } from 'react-redux';
 
 const Header = () => {
   return (
@@ -36,11 +34,7 @@ const Header = () => {
             <BsBell className='headerIcons' />
             <div>
               <img
-                src={
-                  sessionStorage.getItem('utube-v2-user')
-                    ? sessionStorage.getItem('utube-v2-user').imgUrl
-                    : 'https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png'
-                }
+                src='https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png'
                 className='h-7 w-7 rounded-full'
                 alt=''
               />
