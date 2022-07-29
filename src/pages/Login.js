@@ -4,7 +4,7 @@ import logo from '../assets/full_color_icon.svg';
 const Login = () => {
   return (
     <div className='h-screen w-full flex justify-center items-center flex-col'>
-      <div className='w-[300px] bg-black flex flex-col rounded-sm py-5'>
+      <div className='w-[300px] bg-black flex flex-col rounded-sm py-5 shadow-shadow-1'>
         <div className='mx-auto'>
           <img src={logo} alt='' className='h-10 w-15' />
         </div>
