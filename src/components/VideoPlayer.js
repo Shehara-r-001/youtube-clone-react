@@ -5,7 +5,7 @@ import { FaRegThumbsUp, FaRegThumbsDown } from 'react-icons/fa';
 
 const VideoPlayer = () => {
   return (
-    <div className='mt-6 w-full'>
+    <div className='mt-[90px] w-full'>
       <div className='mx-4 sm:mx-[60px] md:mx-[90px] border-b border-[#333] lg:w-[60vw] lg:mx-8'>
         <iframe
           // width='800'
@@ -68,7 +68,7 @@ const VideoPlayer = () => {
               <p className='text-xs text-[#ccc]'>20M subscribers</p>
             </div>
 
-            <button className='bg-red-600 rounded-sm px-3 py-1 text-sm font-semibold hover:opacity-70 duration-200'>
+            <button className='bg-red-600 rounded-sm px-3 py-1 text-sm font-semibold hover:animate-pulse duration-200'>
               SUBSCRIBE
             </button>
           </div>

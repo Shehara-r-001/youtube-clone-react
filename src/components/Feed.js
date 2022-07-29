@@ -10,6 +10,14 @@ const Feed = () => {
       <Video />
       <Video />
       <Video />
+      <Video />
+      <Video />
+      <Video />
+      <Video />
+      <Video />
+      <Video />
+      <Video />
+      <Video />
     </div>
   );
 };
