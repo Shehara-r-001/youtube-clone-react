@@ -4,6 +4,7 @@ import { BiVideoPlus } from 'react-icons/bi';
 import { CgMenuGridR } from 'react-icons/cg';
 import { FiMenu } from 'react-icons/fi';
 import logo from '../assets/utube_edited.jpg';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -33,11 +34,13 @@ const Header = () => {
             <CgMenuGridR className='headerIcons h-7 w-7' />
             <BsBell className='headerIcons' />
             <div>
-              <img
-                src='https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png'
-                className='h-7 w-7 rounded-full'
-                alt=''
-              />
+              <Link to='/login'>
+                <img
+                  src='https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png'
+                  className='h-7 w-7 rounded-full'
+                  alt=''
+                />
+              </Link>
             </div>
           </div>
         </div>

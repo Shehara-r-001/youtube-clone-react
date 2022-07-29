@@ -11,11 +11,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #1a1a1a;
   color: white;
+  overflow-x: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@layer base {
+  body {
+    @apply scrollbar-hide;
+  }
 }
 
 @layer components {
@@ -33,5 +40,17 @@ code {
 
   .sidebarText {
     @apply text-[9px] mt-1;
+  }
+
+  .video__tags {
+    @apply text-blue-500 text-xs font-semibold cursor-pointer;
+  }
+
+  .video__icon {
+    @apply cursor-pointer w-4 h-4;
+  }
+
+  .video__iconText {
+    @apply text-xs font-semibold;
   }
 }

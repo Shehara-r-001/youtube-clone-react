@@ -1,51 +1,32 @@
 import Login from './pages/Login';
 import Feed from './components/Feed';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import Tagsbar from './components/Tagsbar';
 import { Routes, Route } from 'react-router-dom';
-
-const Layout = ({ children }) => (
-  <div className=''>
-    <Header />
-    <div className=''>
-      <Sidebar />
-      <div className='md:ml-[70px]'>
-        <Tagsbar />
-        {children}
-      </div>
-    </div>
-  </div>
-);
+import Homepage from './pages/Homepage';
+import VideoPage from './pages/VideoPage';
+import Header from './components/Header';
 
 function App() {
+  const Layout = ({ children }) => (
+    <div>
+      <Header />
+      {children}
+    </div>
+  );
+
   return (
     <Routes>
-      <Route
-        path='/'
-        element={
-          <Layout>
-            <Feed />
-          </Layout>
-        }
-      />
+      <Route path='/' element={<Homepage />} />
       <Route path='/login' element={<Login />} />
       <Route
-        path='/search'
+        path='/video/:id'
         element={
           <Layout>
-            <h1>Search Results</h1>
+            <VideoPage />
           </Layout>
         }
       />
-      <Route
-        path='*'
-        element={
-          <Layout>
-            <Feed />
-          </Layout>
-        }
-      />
+      {/* <Route path='/search' element={<h1>Search Results</h1>} /> */}
+      <Route path='*' element={<Feed />} />
     </Routes>
   );
 }
