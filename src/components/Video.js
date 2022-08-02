@@ -2,6 +2,7 @@ import React from 'react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import Interpunct from 'react-interpunct';
 import { Link } from 'react-router-dom';
+import TimeAgo from 'timeago-react';
 
 const Video = ({ suggestions, video }) => {
   return (
@@ -31,9 +32,11 @@ const Video = ({ suggestions, video }) => {
               <div className='text-sm text-[#8c8c8c] '>
                 <p className='truncate'>name of the channel</p>
                 <div className='flex items-center text-xs'>
-                  <p className='mr-1 truncate'>111K views</p>
+                  <p className='mr-1 truncate'>{video.views} views</p>
                   <Interpunct> </Interpunct>
-                  <p className='ml-1 truncate'>3 weeks ago</p>
+                  <p className='ml-1 truncate'>
+                    <TimeAgo datetime={video.createdAt} />
+                  </p>
                 </div>
               </div>
             </div>

@@ -21,7 +21,7 @@ const Homepage = ({ type }) => {
       <Header />
       <div className=''>
         <Sidebar />
-        <div className='md:ml-[70px]'>
+        <div className='md:ml-[70px] mt-[60px]'>
           <Tagsbar />
           <Feed videos={videos} />
         </div>
