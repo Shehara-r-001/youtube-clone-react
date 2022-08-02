@@ -3,6 +3,7 @@ import { FiMenu, FiLogOut } from 'react-icons/fi';
 import { AiTwotoneHome } from 'react-icons/ai';
 import { MdOutlineExplore, MdOutlineVideoLibrary } from 'react-icons/md';
 import { BsCollectionPlay, BsPlayCircle } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
@@ -15,18 +16,22 @@ const Sidebar = () => {
           <AiTwotoneHome className='sidebarIcon' />
           <p className='sidebarText'>Home</p>
         </div>
-        <div className='sidebarCont'>
-          <MdOutlineExplore className='sidebarIcon' />
-          <p className='sidebarText'>Explore</p>
-        </div>
+        <Link to='trending'>
+          <div className='sidebarCont'>
+            <MdOutlineExplore className='sidebarIcon' />
+            <p className='sidebarText'>Explore</p>
+          </div>
+        </Link>
         <div className='sidebarCont'>
           <BsPlayCircle className='sidebarIcon' />
           <p className='sidebarText'>Shorts</p>
         </div>
-        <div className='sidebarCont'>
-          <BsCollectionPlay className='sidebarIcon' />
-          <p className='sidebarText'>Subscriptions</p>
-        </div>
+        <Link to='sub'>
+          <div className='sidebarCont'>
+            <BsCollectionPlay className='sidebarIcon' />
+            <p className='sidebarText'>Subscriptions</p>
+          </div>
+        </Link>
         <div className='sidebarCont'>
           <MdOutlineVideoLibrary className='sidebarIcon' />
           <p className='sidebarText'>Library</p>

@@ -15,7 +15,9 @@ function App() {
 
   return (
     <Routes>
-      <Route path='/' element={<Homepage />} />
+      <Route path='/' element={<Homepage type='random' />} />
+      <Route path='/sub' element={<Homepage type='sub' />} />
+      <Route path='/trending' element={<Homepage type='trending' />} />
       <Route path='/login' element={<Login />} />
       <Route
         path='/video/:id'

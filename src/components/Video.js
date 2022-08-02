@@ -3,7 +3,7 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import Interpunct from 'react-interpunct';
 import { Link } from 'react-router-dom';
 
-const Video = ({ suggestions }) => {
+const Video = ({ suggestions, video }) => {
   return (
     <Link to='/video/test_id'>
       <div className='transition-all duration-300 my-3'>
@@ -27,7 +27,7 @@ const Video = ({ suggestions }) => {
               }`}
             />
             <div className={`flex-1 ml-2 ${suggestions && 'w-[200px]'}`}>
-              <h1 className='font-semibold text-white'>name of the video</h1>
+              <h1 className='font-semibold text-white'>{video.title}</h1>
               <div className='text-sm text-[#8c8c8c] '>
                 <p className='truncate'>name of the channel</p>
                 <div className='flex items-center text-xs'>
