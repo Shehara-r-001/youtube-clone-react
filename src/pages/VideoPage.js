@@ -11,7 +11,7 @@ const VideoPage = () => {
 
   const fetchComments = async () => {
     const comments = await axios.get(
-      `http://localhost:3300/comments/${currentVideo._id}`
+      `http://localhost:3300/api/comments/${currentVideo._id}`
     );
     setComments(comments.data);
   };

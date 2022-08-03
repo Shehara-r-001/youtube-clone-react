@@ -16,7 +16,9 @@ const Header = () => {
           <FiMenu className='headerIcons h-7 w-7' />
 
           {/* <Logo /> */}
-          <img src={logo} alt='' className='h-8' />
+          <Link to='/'>
+            <img src={logo} alt='' className='h-8' />
+          </Link>
         </div>
 
         <div className='flex items-center justify-between md:w-[70vw] sm:w-[65vw]'>

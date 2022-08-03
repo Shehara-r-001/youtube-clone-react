@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { format } from 'timeago.js';
 import { videoSuccessful } from '../redux/videoSlice';
+import { useTruncate } from '../useTruncate';
 
 const Video = ({ suggestions, video }) => {
   const [channel, setChannel] = useState({});
+  const views = useTruncate(video?.views);
 
   const fetchChannel = async () => {
     const res = await axios.get(
@@ -37,9 +39,9 @@ const Video = ({ suggestions, video }) => {
           </div>
           <div className={` flex  ${!suggestions ? 'items-center py-2' : ''}`}>
             <img
-              src='https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png'
+              src={`https://avatars.dicebear.com/api/open-peeps/${channel?.name}.svg`}
               alt=''
-              className={`h-10 w-10 rounded-full sm:h-8 sm:w-8 ${
+              className={`h-10 w-10 rounded-full sm:h-8 sm:w-8 bg-red-900 ${
                 suggestions && 'hidden'
               }`}
             />
@@ -48,7 +50,7 @@ const Video = ({ suggestions, video }) => {
               <div className='text-sm text-[#8c8c8c] '>
                 <p className='truncate'>{channel?.name}</p>
                 <div className='flex items-center text-xs'>
-                  <p className='mr-1 truncate'>{video?.views} views</p>
+                  <p className='mr-1 truncate'>{views} views</p>
                   <Interpunct> </Interpunct>
                   <p className='ml-1 truncate'>{format(video?.createdAt)}</p>
                 </div>
