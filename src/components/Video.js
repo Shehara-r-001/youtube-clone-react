@@ -1,17 +1,33 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import Interpunct from 'react-interpunct';
-import { Link } from 'react-router-dom';
-import TimeAgo from 'timeago-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
+import { format } from 'timeago.js';
+import { videoSuccessful } from '../redux/videoSlice';
 
 const Video = ({ suggestions, video }) => {
+  const [channel, setChannel] = useState({});
+
+  const fetchChannel = async () => {
+    const res = await axios.get(
+      `http://localhost:3300/api/users/find/${video.userID}`
+    );
+    setChannel(res.data);
+  };
+
+  useEffect(() => {
+    fetchChannel();
+  }, [video.userID]);
+
   return (
-    <Link to='/video/test_id'>
+    <Link to={`/video/${video._id}`}>
       <div className='transition-all duration-300 my-3'>
         <div className={`px-10 group sm:px-3 ${suggestions ? 'flex' : ''}`}>
           <div className='relative'>
             <img
-              src='https://i.ytimg.com/vi/duJNVv9m2NY/maxresdefault.jpg'
+              src={video?.imgUrl}
               alt='thumb'
               className={`${suggestions && 'h-[100px] w-[180px]'}`}
             />
@@ -28,15 +44,13 @@ const Video = ({ suggestions, video }) => {
               }`}
             />
             <div className={`flex-1 ml-2 ${suggestions && 'w-[200px]'}`}>
-              <h1 className='font-semibold text-white'>{video.title}</h1>
+              <h1 className='font-semibold text-white'>{video?.title}</h1>
               <div className='text-sm text-[#8c8c8c] '>
-                <p className='truncate'>name of the channel</p>
+                <p className='truncate'>{channel?.name}</p>
                 <div className='flex items-center text-xs'>
-                  <p className='mr-1 truncate'>{video.views} views</p>
+                  <p className='mr-1 truncate'>{video?.views} views</p>
                   <Interpunct> </Interpunct>
-                  <p className='ml-1 truncate'>
-                    <TimeAgo datetime={video.createdAt} />
-                  </p>
+                  <p className='ml-1 truncate'>{format(video?.createdAt)}</p>
                 </div>
               </div>
             </div>

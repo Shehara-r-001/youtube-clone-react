@@ -1,20 +1,12 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Feed from '../components/Feed';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Tagsbar from '../components/Tagsbar';
+import useFetch from '../useFetch';
 
 const Homepage = ({ type }) => {
-  const [videos, setVideos] = useState([]);
-
-  useEffect(() => {
-    const fetchVideos = async () => {
-      const res = await axios.get(`http://localhost:3300/api/videos/${type}`);
-      setVideos(res.data);
-    };
-    fetchVideos();
-  }, [type]);
+  const [videos] = useFetch(type);
 
   return (
     <div className=''>

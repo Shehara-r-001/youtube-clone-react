@@ -1,16 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BiCut, BiDotsHorizontalRounded } from 'react-icons/bi';
 import { MdPlaylistAdd } from 'react-icons/md';
 import { FaRegThumbsUp, FaRegThumbsDown } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { videoSuccessful } from '../redux/videoSlice';
+import { useLocation } from 'react-router-dom';
 
 const VideoPlayer = () => {
+  const { currentUser } = useSelector((state) => state.user);
+  const { currentVideo } = useSelector((state) => state.video);
+  const dispatch = useDispatch();
+  const [channel, setChannel] = useState();
+  console.log(currentVideo);
+
+  const path = useLocation().pathname.split('/')[2];
+  // console.log(path);
+
+  const fetchData = async () => {
+    try {
+      const videoRes = await axios.get(
+        `http://localhost:3300/api/videos/find/${path}`
+      );
+      const channelRes = await axios.get(
+        `http://localhost:3300/api/users/find/${videoRes.data.userID}`
+      );
+      setChannel(channelRes.data);
+      dispatch(videoSuccessful(videoRes.data));
+    } catch (error) {}
+  };
+  useEffect(() => {
+    fetchData();
+  }, [path, dispatch]);
   return (
     <div className='mt-[90px] w-full'>
       <div className='mx-4 sm:mx-[60px] md:mx-[90px] border-b border-[#333] lg:w-[60vw] lg:mx-8'>
         <iframe
           // width='800'
           // height='500'
-          src='https://www.youtube.com/embed/aIsFywuZPoQ'
+          src={currentVideo.videoUrl}
           title='YouTube video player'
           allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture full'
           className='w-[calc(100vw-32px)] sm:w-[calc(100vw-120px)] md:w-[calc(100vw-180px)] h-[300px] sm:h-[360px] md:h-[420px] mx-auto lg:w-[60vw] lg:mx-0 lg:h-[40vw]'
@@ -22,9 +50,7 @@ const VideoPlayer = () => {
           <p className='video__tags'>#monroe</p>
         </div>
         <div>
-          <h1 className='text-md font-semibold'>
-            BLONDE | Official Trailer | Netflix
-          </h1>
+          <h1 className='text-md font-semibold'>{currentVideo.title}</h1>
         </div>
         <div>
           <div className='flex text-xs text-[#ccc] space-x-2'>

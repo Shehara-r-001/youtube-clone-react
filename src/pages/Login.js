@@ -1,7 +1,44 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import logo from '../assets/full_color_icon.svg';
+import { useDispatch } from 'react-redux';
+import { loginFailed, loginStart, loginSuccessful } from '../redux/userSlice';
+
+const authUrl = 'http://localhost:3300/api/auth';
 
 const Login = () => {
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const dispatch = useDispatch();
+
+  const loginHandler = async (e) => {
+    e.preventDefault();
+    dispatch(loginStart());
+    try {
+      const res = await axios.post(`${authUrl}/signin`, {
+        name,
+        password,
+      });
+      // console.log(res.data);
+      dispatch(loginSuccessful(res.data));
+    } catch (error) {
+      dispatch(loginFailed());
+    }
+  };
+
+  const signUpHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post(`${authUrl}/signup`, {
+        name,
+        email,
+        password,
+      });
+      console.log(res.data);
+    } catch (error) {}
+  };
   return (
     <div className='h-screen w-full flex justify-center items-center flex-col'>
       <div className='w-[300px] bg-black flex flex-col rounded-sm py-5 shadow-shadow-1'>
@@ -14,13 +51,17 @@ const Login = () => {
               type='text'
               placeholder='Username'
               className='login__input'
+              onChange={(e) => setName(e.target.value)}
             />
             <input
               type='Password'
               placeholder='Password'
               className='login__input'
+              onChange={(e) => setPassword(e.target.value)}
             />
-            <button className='login__btn'>Login</button>
+            <button onClick={loginHandler} className='login__btn'>
+              Login
+            </button>
           </div>
         </form>
         <form action='submit' className='mt-6'>
@@ -29,14 +70,23 @@ const Login = () => {
               type='text'
               placeholder='Username'
               className='login__input'
+              onChange={(e) => setName(e.target.value)}
             />
-            <input type='text' placeholder='Email' className='login__input' />
+            <input
+              type='text'
+              placeholder='Email'
+              className='login__input'
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <input
               type='Password'
               placeholder='Password'
               className='login__input'
+              onChange={(e) => setPassword(e.target.value)}
             />
-            <button className='login__btn'>Register</button>
+            <button onClick={signUpHandler} className='login__btn'>
+              Register
+            </button>
           </div>
         </form>
       </div>
