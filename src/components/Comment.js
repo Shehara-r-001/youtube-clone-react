@@ -1,7 +1,7 @@
 import React from 'react';
 import { BiLike, BiDislike } from 'react-icons/bi';
 
-const Comment = () => {
+const Comment = ({ comment }) => {
   return (
     <div>
       <div className='flex space-x-3 my-4'>

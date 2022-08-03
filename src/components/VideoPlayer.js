@@ -6,13 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { videoSuccessful } from '../redux/videoSlice';
 import { useLocation } from 'react-router-dom';
+import { useTruncate } from '../useTruncate';
 
 const VideoPlayer = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { currentVideo } = useSelector((state) => state.video);
   const dispatch = useDispatch();
   const [channel, setChannel] = useState();
-  console.log(currentVideo);
+  // console.log(currentVideo);
+  const views = useTruncate(currentVideo?.views);
 
   const path = useLocation().pathname.split('/')[2];
   // console.log(path);
@@ -29,9 +31,11 @@ const VideoPlayer = () => {
       dispatch(videoSuccessful(videoRes.data));
     } catch (error) {}
   };
+
   useEffect(() => {
     fetchData();
   }, [path, dispatch]);
+
   return (
     <div className='mt-[90px] w-full'>
       <div className='mx-4 sm:mx-[60px] md:mx-[90px] border-b border-[#333] lg:w-[60vw] lg:mx-8'>
@@ -44,24 +48,29 @@ const VideoPlayer = () => {
           className='w-[calc(100vw-32px)] sm:w-[calc(100vw-120px)] md:w-[calc(100vw-180px)] h-[300px] sm:h-[360px] md:h-[420px] mx-auto lg:w-[60vw] lg:mx-0 lg:h-[40vw]'
         ></iframe>
         <div className='flex items-center space-x-2 mt-4'>
-          <p className='video__tags'>#netflix</p>
-          <p className='video__tags'>#blonde</p>
-          <p className='video__tags'>#anna</p>
-          <p className='video__tags'>#monroe</p>
+          {currentVideo.tags.map((tag, index) => (
+            <p className='video__tags' key={index}>
+              #{tag}
+            </p>
+          ))}
         </div>
         <div>
           <h1 className='text-md font-semibold'>{currentVideo.title}</h1>
         </div>
         <div>
           <div className='flex text-xs text-[#ccc] space-x-2'>
-            <p>1.3M views</p>
+            <p>{views} views</p>
             <p>{'\u00B7'}</p>
             <p>1 day ago</p>
           </div>
           <div className='flex items-center justify-between mt-2 px-1 pb-2 lg:w-[60vw] lg:mx-0'>
             <div className='flex items-center space-x-2'>
               <FaRegThumbsUp className='video__icon' />
-              <p className='video__iconText'>12.1k</p>
+              <p className='video__iconText'>
+                {currentVideo.likes.length === 0
+                  ? 'LIKE'
+                  : currentVideo.likes.length}
+              </p>
             </div>
             <div className='flex items-center space-x-2'>
               <FaRegThumbsDown className='video__icon' />
@@ -84,14 +93,16 @@ const VideoPlayer = () => {
       <div className='px-4 sm:w-[calc(100vw-120px)] sm:mx-auto sm:px-0 md:w-[calc(100vw-180px)] lg:w-[60vw] lg:mx-8'>
         <div className='flex items-center space-x-2 py-3'>
           <img
-            src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9lbZ6Qa7KgWUMZ6Y04SRhQTGjnj541h2vUQ&usqp=CAU'
+            src={`https://avatars.dicebear.com/api/open-peeps/${channel?.name}.svg`}
             alt='channel logo'
-            className='h-10 w-10 object-cover rounded-full'
+            className='h-10 w-10 object-cover rounded-full bg-red-900'
           />
           <div className='flex items-center flex-1'>
             <div className='flex-1'>
-              <h1 className='text-md font-semibold'>NETFLIX</h1>
-              <p className='text-xs text-[#ccc]'>20M subscribers</p>
+              <h1 className='text-md font-semibold'>{channel?.name}</h1>
+              <p className='text-xs text-[#ccc]'>
+                {channel?.subscribers} subscribers
+              </p>
             </div>
 
             <button className='bg-red-600 rounded-sm px-3 py-1 text-sm font-semibold hover:animate-pulse duration-200'>
@@ -99,14 +110,13 @@ const VideoPlayer = () => {
             </button>
           </div>
         </div>
-        <h1 className='text-md font-semibold'>
-          BLONDE | Official Trailer | Netflix
-        </h1>
+        <h1 className='text-md font-semibold'>{currentVideo.title}</h1>
         <div className='flex items-center space-x-2 mt-1'>
-          <p className='video__tags'>#netflix</p>
-          <p className='video__tags'>#blonde</p>
-          <p className='video__tags'>#anna</p>
-          <p className='video__tags'>#monroe</p>
+          {currentVideo.tags.map((tag, index) => (
+            <p className='video__tags' key={index}>
+              #{tag}
+            </p>
+          ))}
         </div>
         <p className='text-xs text-[#ccc] mt-2 cursor-pointer'>SHOW MORE</p>
       </div>
